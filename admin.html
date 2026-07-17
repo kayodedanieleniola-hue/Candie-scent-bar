@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review Admin — Candie Scent Bar</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F8F5F0;
+    --beige:#EFE6DA;
+    --charcoal:#1F1F1F;
+    --slate:#5F5F5F;
+    --gold:#C8A46A;
+    --gold-dark:#A9854A;
+    --font-display:'League Spartan', sans-serif;
+    --font-body:'Quicksand', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    background:var(--ivory);
+    color:var(--charcoal);
+    min-height:100vh;
+  }
+  h1,h2{font-family:var(--font-display);font-weight:600;}
+  .admin-header{
+    background:#1f1f1f;
+    color:#fff;
+    padding:1.6rem 5vw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .admin-header h1{margin:0;font-size:1.4rem;color:#fff;}
+  .admin-header span{color:var(--gold);font-size:.85rem;}
+  main{max-width:800px;margin:0 auto;padding:2.5rem 5vw 5rem;}
+
+  #lockScreen{
+    max-width:380px;
+    margin:15vh auto 0;
+    text-align:center;
+    padding:2.5rem 2rem;
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 20px 45px rgba(31,31,31,.1);
+  }
+  #lockScreen input{
+    width:100%;
+    padding:.85rem 1rem;
+    border:1px solid rgba(31,31,31,.15);
+    border-radius:8px;
+    font-size:1rem;
+    font-family:var(--font-body);
+    margin:1.2rem 0;
+  }
+  #lockScreen button{
+    width:100%;
+    padding:.85rem 1rem;
+    background:var(--gold);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    font-size:.95rem;
+    letter-spacing:.03em;
+    cursor:pointer;
+  }
+  #lockScreen button:hover{background:var(--gold-dark);}
+  #lockError{color:#b3413a;font-size:.85rem;margin-top:.8rem;display:none;}
+
+  .empty-state{
+    text-align:center;
+    color:var(--slate);
+    padding:4rem 1rem;
+    font-size:1rem;
+  }
+  .pending-card{
+    background:#fff;
+    border:1px solid rgba(200,164,106,.25);
+    border-radius:14px;
+    padding:1.6rem 1.8rem;
+    margin-bottom:1.3rem;
+    box-shadow:0 10px 26px rgba(31,31,31,.06);
+  }
+  .pending-stars{color:var(--gold);letter-spacing:.12em;margin-bottom:.7rem;font-size:1.1rem;}
+  .pending-text{font-size:.98rem;line-height:1.6;color:var(--charcoal);margin-bottom:.9rem;}
+  .pending-meta{font-size:.82rem;color:var(--slate);margin-bottom:1.2rem;}
+  .pending-meta strong{color:var(--gold-dark);}
+  .pending-actions{display:flex;gap:.8rem;}
+  .pending-actions button{
+    flex:1;
+    padding:.7rem 1rem;
+    border-radius:8px;
+    border:none;
+    font-weight:600;
+    font-size:.88rem;
+    cursor:pointer;
+    font-family:var(--font-body);
+  }
+  .approve-btn{background:var(--gold);color:#fff;}
+  .approve-btn:hover{background:var(--gold-dark);}
+  .reject-btn{background:none;border:1.5px solid #b3413a !important;color:#b3413a;}
+  .reject-btn:hover{background:#b3413a;color:#fff;}
+  .pending-actions button:disabled{opacity:.5;cursor:default;}
+
+.published-card{
+  background:#fff;
+  border:1px solid rgba(31,31,31,.08);
+  border-radius:14px;
+  padding:1.6rem 1.8rem;
+  margin-bottom:1.3rem;
+  box-shadow:0 10px 26px rgba(31,31,31,.05);
+}
+.delete-only-btn{
+  width:100%;
+  padding:.7rem 1rem;
+  border-radius:8px;
+  border:1.5px solid #b3413a;
+  background:none;
+  color:#b3413a;
+  font-weight:600;
+  font-size:.88rem;
+  cursor:pointer;
+  font-family:var(--font-body);
+  margin-top:1rem;
+}
+.delete-only-btn:hover{background:#b3413a;color:#fff;}
+.delete-only-btn:disabled{opacity:.5;cursor:default;}
+</style>
+</head>
+<body>
+
+<div id="lockScreen">
+  <h2>Review Admin</h2>
+  <p style="color:var(--slate);font-size:.9rem;">Enter the admin password to continue.</p>
+  <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
+  <button id="unlockBtn">Unlock</button>
+  <p id="lockError">Incorrect password.</p>
+</div>
+
+<div id="adminApp" style="display:none;">
+  <div class="admin-header">
+    <h1>Pending Reviews</h1>
+    <span id="pendingCount">0 waiting</span>
+  </div>
+  <main>
+    <div id="pendingList"></div>
+    <p class="empty-state" id="emptyState" style="display:none;">No pending reviews right now.</p>
+  </main>
+
+  <div class="admin-header">
+    <h1>Published Reviews</h1>
+    <span id="publishedCount">0 live</span>
+  </div>
+  <main>
+    <p style="color:var(--slate);font-size:.85rem;margin:-1rem 0 1.5rem;">These are already visible to everyone on the site. Delete any of these to permanently remove them from the public Reviews section.</p>
+    <div id="publishedList"></div>
+    <p class="empty-state" id="publishedEmptyState" style="display:none;">No published reviews yet.</p>
+  </main>
+</div>
+
+<script>
+// This is a simple deterrent, not real security — there is no login system
+// behind it. Good enough to keep casual visitors out of the moderation
+// queue, but change this to something only you know.
+const ADMIN_PASSWORD = 'CandieAdmin2026';
+
+const FIREBASE_URL = 'https://candie-scent-bar-default-rtdb.firebaseio.com';
+const PENDING_ENDPOINT = `${FIREBASE_URL}/pendingReviews.json`;
+const REVIEWS_ENDPOINT_BASE = `${FIREBASE_URL}/reviews`;
+const PENDING_ENDPOINT_BASE = `${FIREBASE_URL}/pendingReviews`;
+
+const RATING_STARS = { 5: '★★★★★', 4: '★★★★☆', 3: '★★★☆☆', 2: '★★☆☆☆', 1: '★☆☆☆☆' };
+
+function escapeHtml(str) {
+  return String(str).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+const lockScreen = document.getElementById('lockScreen');
+const adminApp = document.getElementById('adminApp');
+const passwordInput = document.getElementById('passwordInput');
+const unlockBtn = document.getElementById('unlockBtn');
+const lockError = document.getElementById('lockError');
+const pendingList = document.getElementById('pendingList');
+const pendingCount = document.getElementById('pendingCount');
+const emptyState = document.getElementById('emptyState');
+const publishedList = document.getElementById('publishedList');
+const publishedCount = document.getElementById('publishedCount');
+const publishedEmptyState = document.getElementById('publishedEmptyState');
+
+function unlock() {
+  if (passwordInput.value === ADMIN_PASSWORD) {
+    lockScreen.style.display = 'none';
+    adminApp.style.display = '';
+    loadPending();
+    loadPublished();
+  } else {
+    lockError.style.display = 'block';
+  }
+}
+unlockBtn.addEventListener('click', unlock);
+passwordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
+
+async function loadPending() {
+  pendingList.innerHTML = '';
+  try {
+    const res = await fetch(PENDING_ENDPOINT);
+    const data = await res.json();
+    const entries = data ? Object.keys(data).map(id => ({ id, ...data[id] })) : [];
+    entries.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    pendingCount.textContent = `${entries.length} waiting`;
+    emptyState.style.display = entries.length ? 'none' : '';
+
+    entries.forEach(review => pendingList.appendChild(buildPendingCard(review)));
+  } catch (err) {
+    console.error('Failed to load pending reviews:', err);
+    pendingList.innerHTML = '<p class="empty-state">Something went wrong loading reviews. Refresh to try again.</p>';
+  }
+}
+
+function buildPendingCard(review) {
+  const card = document.createElement('div');
+  card.className = 'pending-card';
+  const submittedDate = review.date ? new Date(review.date).toLocaleString() : 'Unknown date';
+  card.innerHTML = `
+    <div class="pending-stars">${RATING_STARS[review.rating] || '★★★★★'}</div>
+    <p class="pending-text">"${escapeHtml(review.text)}"</p>
+    <p class="pending-meta">— <strong>${escapeHtml(review.name)}</strong> · submitted ${submittedDate}</p>
+    <div class="pending-actions">
+      <button class="approve-btn">Approve</button>
+      <button class="reject-btn">Reject</button>
+    </div>
+  `;
+  card.querySelector('.approve-btn').addEventListener('click', (e) => approveReview(review, card, e.target));
+  card.querySelector('.reject-btn').addEventListener('click', (e) => rejectReview(review, card, e.target));
+  return card;
+}
+
+async function approveReview(review, card, btn) {
+  btn.disabled = true;
+  btn.textContent = 'Approving…';
+  try {
+    // Reuse the same ID it had while pending, so if the person who wrote it
+    // is still tracked in their own browser, their edit/delete controls
+    // keep working after approval.
+    const { id, ...data } = review;
+    const putRes = await fetch(`${REVIEWS_ENDPOINT_BASE}/${id}.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!putRes.ok) throw new Error('Failed to publish review');
+
+    const delRes = await fetch(`${PENDING_ENDPOINT_BASE}/${id}.json`, { method: 'DELETE' });
+    if (!delRes.ok) throw new Error('Failed to clear pending review');
+
+    card.remove();
+    updateCountAfterRemoval();
+  } catch (err) {
+    console.error('Approve failed:', err);
+    alert('Something went wrong approving this review. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Approve';
+  }
+}
+
+async function rejectReview(review, card, btn) {
+  if (!confirm('Reject and permanently delete this review submission?')) return;
+  btn.disabled = true;
+  btn.textContent = 'Rejecting…';
+  try {
+    const res = await fetch(`${PENDING_ENDPOINT_BASE}/${review.id}.json`, { method: 'DELETE' });
+    if (!res.ok) throw new Error('Failed to reject review');
+    card.remove();
+    updateCountAfterRemoval();
+  } catch (err) {
+    console.error('Reject failed:', err);
+    alert('Something went wrong rejecting this review. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Reject';
+  }
+}
+
+function updateCountAfterRemoval() {
+  const remaining = pendingList.querySelectorAll('.pending-card').length;
+  pendingCount.textContent = `${remaining} waiting`;
+  emptyState.style.display = remaining ? 'none' : '';
+}
+
+async function loadPublished() {
+  publishedList.innerHTML = '';
+  try {
+    const res = await fetch(`${REVIEWS_ENDPOINT_BASE}.json`);
+    const data = await res.json();
+    const entries = data ? Object.keys(data).map(id => ({ id, ...data[id] })) : [];
+    entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    publishedCount.textContent = `${entries.length} live`;
+    publishedEmptyState.style.display = entries.length ? 'none' : '';
+
+    entries.forEach(review => publishedList.appendChild(buildPublishedCard(review)));
+  } catch (err) {
+    console.error('Failed to load published reviews:', err);
+    publishedList.innerHTML = '<p class="empty-state">Something went wrong loading reviews. Refresh to try again.</p>';
+  }
+}
+
+function buildPublishedCard(review) {
+  const card = document.createElement('div');
+  card.className = 'published-card';
+  const submittedDate = review.date ? new Date(review.date).toLocaleString() : 'Unknown date';
+  card.innerHTML = `
+    <div class="pending-stars">${RATING_STARS[review.rating] || '★★★★★'}</div>
+    <p class="pending-text">"${escapeHtml(review.text)}"</p>
+    <p class="pending-meta">— <strong>${escapeHtml(review.name)}</strong> · submitted ${submittedDate}</p>
+    <button class="delete-only-btn">Delete</button>
+  `;
+  card.querySelector('.delete-only-btn').addEventListener('click', (e) => deletePublishedReview(review, card, e.target));
+  return card;
+}
+
+async function deletePublishedReview(review, card, btn) {
+  if (!confirm('Permanently delete this review from the live website? This cannot be undone.')) return;
+  btn.disabled = true;
+  btn.textContent = 'Deleting…';
+  try {
+    const res = await fetch(`${REVIEWS_ENDPOINT_BASE}/${review.id}.json`, { method: 'DELETE' });
+    if (!res.ok) throw new Error('Failed to delete published review');
+    card.remove();
+    updatePublishedCountAfterRemoval();
+  } catch (err) {
+    console.error('Delete failed:', err);
+    alert('Something went wrong deleting this review. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Delete';
+  }
+}
+
+function updatePublishedCountAfterRemoval() {
+  const remaining = publishedList.querySelectorAll('.published-card').length;
+  publishedCount.textContent = `${remaining} live`;
+  publishedEmptyState.style.display = remaining ? 'none' : '';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candie Scent Bar — Crafting Presence. Defining Legacy.</title>
+<meta name="description" content="Candie Scent Bar is a premium fragrance house for weddings, birthdays, corporate events and every occasion that deserves a signature scent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#home" class="brand">
+      <img src="assets/logo.webp" alt="Candie Scent Bar" class="brand-logo">
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#gallery" class="nav-link">Past Events</a>
+      <a href="#reviews" class="nav-link">Reviews</a>
+      <a href="#book" class="nav-link nav-cta">Book</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop"></div>
+
+<main>
+
+  <section class="hero" id="home">
+    <picture>
+      <source media="(min-width:1024px)" srcset="assets/hero-bg-2.webp">
+      <img src="assets/hero-bg-mobile.webp" alt="Candie Scent Bar signature fragrance, held by a model beside white roses and hydrangeas" class="hero-bg">
+    </picture>
+    <div class="hero-scrim"></div>
+    <div class="hero-inner">
+      <div class="hero-copy fade-up">
+        <span class="eyebrow">Luxury Fragrance Experience</span>
+        <h1>Crafting Presence.<br>Defining Legacy.</h1>
+        <p>Candie Scent Bar composes bespoke fragrance moments for the milestones that matter — weddings, anniversaries, ceremonies and celebrations, tailored to feel entirely your own.</p>
+        <div class="rating">
+          <span class="stars" aria-label="4.9 out of 5 stars">★★★★★</span>
+          <span class="rating-value">4.9</span>
+          <span class="rating-label">Customer Rating</span>
+        </div>
+        <a href="#book" class="btn btn-gold">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <div class="section-head fade-up">
+      <span class="eyebrow">Moments We've Crafted</span>
+      <h2>Our Past Events</h2>
+      <p>A look inside the celebrations where Candie Scent Bar set the scene.</p>
+    </div>
+
+    <div class="events-showcase fade-up">
+      <div class="events-card" id="eventsCard">
+        <div class="events-track" id="eventsTrack">
+
+          <div class="event-slide" data-index="0">
+            <video class="event-media" src="assets/past-event-1.mp4" poster="assets/past-event-1-poster.jpg" muted loop playsinline preload="metadata"></video>
+            <div class="event-overlay"></div>
+            <button class="event-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="event-caption">
+              <span class="event-tag">Wedding Reception</span>
+              <h3>The Reception Tablescape</h3>
+              <p>Candlelit styling finished with our signature favors</p>
+            </div>
+          </div>
+
+          <div class="event-slide" data-index="1">
+            <video class="event-media" src="assets/past-event-2.mp4" poster="assets/past-event-2-poster.jpg" muted loop playsinline preload="metadata"></video>
+            <div class="event-overlay"></div>
+            <button class="event-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="event-caption">
+              <span class="event-tag">Wedding Reception</span>
+              <h3>Guest Favor Styling</h3>
+              <p>A Candie bottle placed at every seat for the newlyweds' guests</p>
+            </div>
+          </div>
+
+          <div class="event-slide" data-index="2">
+            <video class="event-media" src="assets/past-event-3.mp4" poster="assets/past-event-3-poster.jpg" muted loop playsinline preload="metadata"></video>
+            <div class="event-overlay"></div>
+            <button class="event-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="event-caption">
+              <span class="event-tag">Wedding Reception</span>
+              <h3>Candlelit Place Settings</h3>
+              <p>Gold-rimmed details paired with white florals and soft candlelight</p>
+            </div>
+          </div>
+
+          <div class="event-slide" data-index="3">
+            <video class="event-media" src="assets/past-event-4.mp4" poster="assets/past-event-4-poster.jpg" muted loop playsinline preload="metadata"></video>
+            <div class="event-overlay"></div>
+            <button class="event-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="event-caption">
+              <span class="event-tag">Wedding Reception</span>
+              <h3>A Closer Look</h3>
+              <p>Fine details from the place-setting styling, up close</p>
+            </div>
+          </div>
+
+          <div class="event-slide" data-index="4">
+            <video class="event-media" src="assets/past-event-5.mp4" poster="assets/past-event-5-poster.jpg" muted loop playsinline preload="metadata"></video>
+            <div class="event-overlay"></div>
+            <button class="event-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="event-caption">
+              <span class="event-tag">Wedding Reception</span>
+              <h3>Styling in Motion</h3>
+              <p>Another moment from this celebration's fragrance styling</p>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="events-nav events-nav-prev" id="eventsPrev" aria-label="Previous event">&#10094;</button>
+        <button class="events-nav events-nav-next" id="eventsNext" aria-label="Next event">&#10095;</button>
+      </div>
+
+      <div class="events-dots" id="eventsDots">
+        <button class="events-dot is-active" data-index="0" aria-label="Show event 1"></button>
+        <button class="events-dot" data-index="1" aria-label="Show event 2"></button>
+        <button class="events-dot" data-index="2" aria-label="Show event 3"></button>
+        <button class="events-dot" data-index="3" aria-label="Show event 4"></button>
+        <button class="events-dot" data-index="4" aria-label="Show event 5"></button>
+      </div>
+
+      <div class="events-view-all">
+        <a href="https://www.instagram.com/candiescentbarr?igsh=MTRic2d0OHlqdGZndw==" target="_blank" rel="noopener" class="btn btn-outline-gold">View All</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="section-head fade-up">
+      <span class="eyebrow">Client Love</span>
+      <h2>Customer Reviews</h2>
+      <p>Real words from the celebrations we've been part of.</p>
+    </div>
+
+    <div class="reviews-grid fade-up" id="reviewsGrid">
+      <p class="reviews-empty" id="reviewsEmpty">No reviews yet — be the first to share your experience.</p>
+    </div>
+
+    <div class="reviews-view-all" id="reviewsViewAllWrap" style="display:none;">
+      <button type="button" class="btn btn-outline-gold" id="reviewsViewAllBtn">View All Reviews</button>
+    </div>
+
+    <div class="review-form-wrap booking-card fade-up">
+      <h3 class="review-form-title">Leave a Review</h3>
+      <form class="review-form" id="reviewForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="reviewName">Your Name</label>
+            <input type="text" id="reviewName" name="reviewName" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="reviewRating">Rating</label>
+            <select id="reviewRating" name="reviewRating" required>
+              <option value="5">★★★★★ Excellent</option>
+              <option value="4">★★★★☆ Very Good</option>
+              <option value="3">★★★☆☆ Good</option>
+              <option value="2">★★☆☆☆ Fair</option>
+              <option value="1">★☆☆☆☆ Poor</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field field-full">
+            <label for="reviewText">Your Review</label>
+            <textarea id="reviewText" name="reviewText" rows="3" placeholder="Tell us about your experience" required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gold btn-submit">Submit Review</button>
+        <p class="form-success" id="reviewSuccess">Thank you — your review has been added below.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="booking" id="book">
+    <div class="section-head fade-up">
+      <span class="eyebrow">Reserve Your Experience</span>
+      <h2>Book Your Scent Bar</h2>
+      <p>Tell us about your occasion and our team will craft a fragrance moment around it.</p>
+    </div>
+
+    <form class="booking-card fade-up" id="bookingForm" novalidate>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="eventType">Event Type</label>
+          <select id="eventType" name="eventType" required>
+            <option value="" disabled selected>Select event type</option>
+            <option>Birthday</option>
+            <option>Wedding</option>
+            <option>Anniversary</option>
+            <option>Burial</option>
+            <option>Naming Ceremony</option>
+            <option>Corporate Event</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="eventDate">Event Date</label>
+          <input type="date" id="eventDate" name="eventDate" required>
+        </div>
+        <div class="field">
+          <label for="eventTime">Preferred Time</label>
+          <input type="time" id="eventTime" name="eventTime" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="country">Country</label>
+          <select id="country" name="country" required>
+            <option value="US" data-symbol="$" selected>United States</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="budget">Budget</label>
+          <div class="budget-input">
+            <span class="currency-symbol" id="currencySymbol">$</span>
+            <input type="number" id="budget" name="budget" min="0" placeholder="0.00" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field field-full">
+          <label for="location">Event Location</label>
+          <input type="text" id="location" name="location" placeholder="Venue or address" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field field-full">
+          <label for="notes">Additional Notes <span class="optional">(optional)</span></label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know?"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-submit">Submit Booking</button>
+      <p class="form-success" id="formSuccess">Thank you — your booking request has been received. We'll be in touch shortly.</p>
+    </form>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <img src="assets/logo.webp" alt="Candie Scent Bar" class="footer-logo">
+  <p class="footer-copy">&copy; <span id="year"></span> Candie Scent Bar. All rights reserved.</p>
+  <div class="social-links">
+    <a href="https://www.instagram.com/candiescentbarr?igsh=MTRic2d0OHlqdGZndw==" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 3.3.15 4.7 1.6 4.9 4.9.06 1.3.07 1.6.07 4.8 0 3.2 0 3.6-.07 4.9-.15 3.3-1.6 4.7-4.9 4.9-1.3.06-1.6.07-4.9.07-3.2 0-3.6 0-4.9-.07-3.3-.15-4.7-1.6-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.07-4.9.15-3.3 1.6-4.7 4.9-4.9C8.4 2.2 8.8 2.2 12 2.2zm0 3.1a6.7 6.7 0 100 13.4 6.7 6.7 0 000-13.4zm0 11a4.3 4.3 0 110-8.6 4.3 4.3 0 010 8.6zm6.9-11.3a1.57 1.57 0 11-3.14 0 1.57 1.57 0 013.14 0z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@candiescentbar?_r=1&_t=ZS-97ycG9EiVLL" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon">
+      <svg viewBox="0 0 24 24"><path d="M16.5 2h-3.1v13.4a3 3 0 11-2.1-2.9V9.3a6.1 6.1 0 103.1 5.3V8.6a7.8 7.8 0 004.4 1.4V6.9a4.6 4.6 0 01-2.3-4.9z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<div class="video-modal" id="videoModal">
+  <button class="video-modal-close" id="videoModalClose" aria-label="Close video">&times;</button>
+  <div class="video-modal-inner">
+    <video class="video-modal-player" id="videoModalPlayer" src="assets/past-event-1.mp4" controls playsinline></video>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
